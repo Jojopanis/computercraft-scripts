@@ -4,6 +4,9 @@ term.redirect(screen)
 local spawner_list = {
     {'cav_creeper',54},
 }
+local menu_list = {
+    {' Menu', nil}
+}
 
 local function draw_button(x,y,color,message,sizeX,sizeY)
     sizeX = sizeX or 7
@@ -18,7 +21,7 @@ end
 
 local function draw_menu()
     paintutils.drawLine(61,1,61,26,colors.gray)
-    draw_button(menu_map[1].x,menu_map[1].y,colors.gray, " Menu")
+    init_buttons(menu_map,menu_list)
 end
 
 local function init_buttons(map,list)
