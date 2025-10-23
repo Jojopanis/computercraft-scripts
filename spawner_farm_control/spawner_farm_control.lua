@@ -43,10 +43,11 @@ for i= 2,22,4 do
     table.insert(menu_map, {x=63, y=i})
 end
 
-for i,button in ipairs(button_map) do
-    draw_button(button.x,button.y)
-end
+--for i,button in ipairs(button_map) do
+--    draw_button(button.x,button.y)
+--end
 
+init_buttons(button_map,spawner_list)
 draw_menu()
 
 while true do
