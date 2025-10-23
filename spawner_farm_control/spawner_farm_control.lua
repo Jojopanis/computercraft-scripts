@@ -24,12 +24,12 @@ local function draw_button(x,y,color,message,sizeX,sizeY)
     write(string.sub(message,1,6))
 end
 local function draw_button2(button,item,is_menu)
-    x = button.x
-    y = button.y
-    sizeX = 7
-    sizeY = 2
-    message = item.label or "......"
-    color = colors.gray
+    local x = button.x
+    local y = button.y
+    local sizeX = 7
+    local sizeY = 2
+    local message = item.label or "......"
+    local color = colors.gray
     if is_menu == false then
         if button.state == true then
             color = colors.green
@@ -47,10 +47,10 @@ local function init_buttons(map,list,is_menu)
     color = color or colors.cyan
     for i,item in ipairs(list) do
         --draw_button(map[i].x, map[i].y, color, item.label)
-        draw_button2(map[i],item,is_menu)
         if map[i].state == nil then
             map[i].state = false
         end
+        draw_button2(map[i],item,is_menu)
     end
 end
 
