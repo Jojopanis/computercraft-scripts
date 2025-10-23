@@ -28,6 +28,9 @@ local function init_buttons(map,list,color)
     color = color or colors.cyan
     for i,item in ipairs(list) do
         draw_button(map[i].x, map[i].y, color, item.label)
+        if map[i].state == nil then
+            map[i].state = false
+        end
     end
 end
 
@@ -51,7 +54,7 @@ end
 
 for i=2,52,10 do
     for j=2,22,4 do
-        table.insert(button_map,{x=i,y=j,state=false})
+        table.insert(button_map,{x=i,y=j,state=nil})
     end
 end
 
@@ -62,12 +65,11 @@ end
 term.setBackgroundColor(colors.black)
 term.clear()
 term.setTextColor(colors.white)
-draw_spawners()
-draw_menu()
 
 while true do
+    draw_spawners()
+    draw_menu()
     local _,_,x,y = os.pullEvent("monitor_touch")
-    local button = button_clicked(x,y,button_map)
-    term.setCursorPos(36,13)
-    print(button)
+    local id = button_clicked(x,y,button_map)
+    button_map[id].state = not button_map[id].state
 end
