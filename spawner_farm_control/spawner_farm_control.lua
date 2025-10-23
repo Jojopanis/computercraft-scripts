@@ -23,11 +23,31 @@ local function draw_button(x,y,color,message,sizeX,sizeY)
     term.setTextColor(colors.black)
     write(string.sub(message,1,6))
 end
+local function draw_button2(button,item,is_menu)
+    x = button.x
+    y = button.y
+    sizeX = 7
+    sizeY = 2
+    message = item.label or "......"
+    color = colors.gray
+    if is_menu == false then
+        if button.state == false then
+            color = colors.red
+        else
+            color = colors.green
+        end
+    end
+    paintutils.drawFilledBox(x,y,x+sizeX,y+sizeY,color)
+    term.setCursorPos(x+1,y+1)
+    term.setTextColor(colors.black)
+    write(string.sub(message,1,6))
+end
 
-local function init_buttons(map,list,color)
+local function init_buttons(map,list,is_menu)
     color = color or colors.cyan
     for i,item in ipairs(list) do
-        draw_button(map[i].x, map[i].y, color, item.label)
+        --draw_button(map[i].x, map[i].y, color, item.label)
+        draw_button2(map[i],item,is_menu)
         if map[i].state == nil then
             map[i].state = false
         end
@@ -36,11 +56,11 @@ end
 
 local function draw_menu()
     paintutils.drawLine(61,1,61,26,colors.gray)
-    init_buttons(menu_map,menu_list,colors.gray)
+    init_buttons(menu_map,menu_list,true)
 end
 
 local function draw_spawners()
-    init_buttons(button_map,spawner_list,colors.red)
+    init_buttons(button_map,spawner_list,false)
 end
 
 local function button_clicked(x,y,map)
