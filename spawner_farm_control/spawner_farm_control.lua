@@ -31,10 +31,10 @@ local function draw_button2(button,item,is_menu)
     message = item.label or "......"
     color = colors.gray
     if is_menu == false then
-        if button.state == false then
-            color = colors.red
-        else
+        if button.state == true then
             color = colors.green
+        else
+            color = colors.red
         end
     end
     paintutils.drawFilledBox(x,y,x+sizeX,y+sizeY,color)
@@ -91,5 +91,7 @@ while true do
     draw_menu()
     local _,_,x,y = os.pullEvent("monitor_touch")
     local id = button_clicked(x,y,button_map)
-    button_map[id].state = not button_map[id].state
+    if id ~= nil then
+        button_map[id].state = not button_map[id].state
+    end
 end
