@@ -19,15 +19,15 @@ local function draw_button(x,y,color,message,sizeX,sizeY)
     write(string.sub(message,1,6))
 end
 
-local function draw_menu()
-    paintutils.drawLine(61,1,61,26,colors.gray)
-    init_buttons(menu_map,menu_list)
-end
-
 local function init_buttons(map,list)
     for i,spawner in ipairs(list) do
         draw_button(map[i].x, map[i].y, nil, spawner[1])
     end
+end
+
+local function draw_menu()
+    paintutils.drawLine(61,1,61,26,colors.gray)
+    init_buttons(menu_map,menu_list)
 end
 
 term.setBackgroundColor(colors.black)
