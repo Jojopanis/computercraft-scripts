@@ -4,7 +4,7 @@ term.redirect(screen)
 --Variables Definition
 local spawner_list = {
     {label = 'cav_creeper',relay_id = 54},
-    {label = 'witch',relay_id = 73},
+    {label = 'witch',relay_id = 72},
 }
 local menu_list = {
     {label = ' Menu'}
