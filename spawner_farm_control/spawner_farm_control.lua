@@ -76,9 +76,10 @@ end
 --Rednet Functions
 local net = {}
 
-function net.send(map,id)
-    local receiver_id = rednet.lookup("mob_farm", "relay")
-    rednet.send(receiver_id,map[id].relay_id)
+net.receiver_id = rednet.lookup("mob_farm", "relay")
+
+function net.send(spawner)
+    rednet.send(net.receiver_id,spawner.relay_id)
 end
 
 function net.init()
@@ -100,6 +101,6 @@ while true do
     local s_id = button_clicked(x,y,button_map)
     if s_id ~= nil then
         button_map[s_id].state = not button_map[s_id].state
-        net.send(button_map,s_id)
+        net.send(spawner_list[s_id])
     end
 end
