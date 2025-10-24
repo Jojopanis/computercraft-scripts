@@ -73,18 +73,33 @@ local function populate_menu()
     end
 end
 
+--Rednet Functions
+local net = {}
+
+function net.send(map,id)
+    local receiver_id = rednet.lookup("mob_farm", "relay")
+    rednet.send(receiver_id,map[id].relay_id)
+end
+
+function net.init()
+    local side = peripheral.getName(peripheral.find("modem"))
+    rednet.open(side)
+    rednet.host("mob_farm", "control")
+end
+
 term.setBackgroundColor(colors.black)
 term.clear()
 term.setTextColor(colors.white)
 populate_buttons()
 populate_menu()
+net.init()
 
 while true do
     draw_spawner_screen()
-    draw_menu()
     local _,_,x,y = os.pullEvent("monitor_touch")
     local s_id = button_clicked(x,y,button_map)
     if s_id ~= nil then
         button_map[s_id].state = not button_map[s_id].state
+        net.send(button_map,s_id)
     end
 end
